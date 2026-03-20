@@ -25,6 +25,7 @@ export interface Experience {
 export interface Education {
   degree: Record<Lang, string>;
   school: string;
+  logo?: string;
   location: string;
   startDate: string;
   endDate: string;
@@ -315,15 +316,12 @@ export const experiences: Experience[] = [
 
 export const educations: Education[] = [
   {
-    degree: { en: "Bachelor of Computer Science", id: "Sarjana Ilmu Komputer" },
-    school: "University Name",
-    location: "Jakarta, Indonesia",
-    startDate: "2020",
+    degree: { en: "Informatics", id: "Informatika" },
+    school: "Universitas AMIKOM Yogyakarta",
+    logo: "https://media.licdn.com/dms/image/v2/C510BAQGgqRef7uBbtA/company-logo_100_100/company-logo_100_100/0/1630634933046?e=1775692800&v=beta&t=Uu5VtAs33VnEaB-bsfZ9cMnBMwasNlyV41zc4bGQW58",
+    location: "Yogyakarta, Indonesia",
+    startDate: "Sep 2020",
     endDate: "2024",
-    description: {
-      en: "Focused on software engineering and web development",
-      id: "Fokus pada rekayasa perangkat lunak dan pengembangan web",
-    },
   },
 ];
 
