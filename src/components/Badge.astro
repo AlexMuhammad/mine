@@ -1,0 +1,23 @@
+---
+import type { IconName } from "./Icon";
+import Icon from "./Icon";
+
+interface Props {
+  variant?: "tag" | "status" | "highlight";
+  icon?: IconName;
+  class?: string;
+}
+
+const { variant = "tag", icon, class: className } = Astro.props;
+
+const variants = {
+  tag: "px-3 py-1 text-xs font-primary font-bold uppercase tracking-wider rounded-md border border-primary-500/30 text-primary-500 bg-[#25d0ab]/10",
+  status: "inline-flex items-center gap-1.5 px-4 py-1.5 rounded-sm border border-primary-500/30 text-primary-500 text-xs font-primary font-bold uppercase tracking-widest bg-[#25d0ab]/10",
+  highlight: "px-3 py-1 text-xs font-bold rounded-full bg-yellow-500/10 text-yellow-500 border border-yellow-500/30 uppercase tracking-wider",
+};
+---
+
+<span class:list={[variants[variant], className]}>
+  {icon && <Icon name={icon} size={14} client:load />}
+  <slot />
+</span>

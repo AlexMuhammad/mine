@@ -1,0 +1,33 @@
+---
+import type { Lang } from "../i18n/translations";
+import { t } from "../i18n/translations";
+import { skillCategories } from "../i18n/data";
+import SectionHeader from "./SectionHeader.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="skills" class="mb-20">
+  <SectionHeader title={t(lang, "section.skills")} />
+
+  <div class="grid md:grid-cols-3 gap-4">
+    {skillCategories.map((category) => (
+      <div class="rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6">
+        <h3 class="text-xs font-primary font-bold uppercase tracking-[0.15em] text-gray-500 dark:text-gray-500 mb-4">
+          {category.label[lang]}
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          {category.skills.map((skill) => (
+            <span class="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-neutral-700">
+              {skill.name}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

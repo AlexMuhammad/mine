@@ -8,6 +8,13 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://alexdev.dev",
   integrations: [react(), sitemap()],
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "id"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },

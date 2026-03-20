@@ -12,4 +12,15 @@
 @theme {
   --font-primary: "Gruppe A", sans-serif;
   --font-secondary: "Inter", sans-serif;
+
+  --color-primary-50: #e8faf5;
+  --color-primary-100: #c5f3e6;
+  --color-primary-200: #8fe8cf;
+  --color-primary-300: #4dd9b4;
+  --color-primary-400: #25d0ab;
+  --color-primary-500: #25d0ab;
+  --color-primary-600: #1fb894;
+  --color-primary-700: #199a7c;
+  --color-primary-800: #147b63;
+  --color-primary-900: #0f5d4b;
 }

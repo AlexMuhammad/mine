@@ -1,0 +1,114 @@
+---
+import type { Lang } from "../i18n/translations";
+import { t } from "../i18n/translations";
+import Icon from "./Icon";
+import Badge from "./Badge.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="about" class="mb-20 border-[0.5px] border-gray-900 rounded-sm p-4">
+  <!-- Main card -->
+  <div class="hero-card relative overflow-hidden rounded-sm border border-[#25d0ab1a] bg-[linear-gradient(180deg,rgba(37,208,171,0.08)_0%,transparent_40%)] p-6 md:p-4">
+    <!-- Top badges -->
+    <div class="flex flex-wrap gap-3 mb-6">
+      <Badge variant="status" icon="sparkles">
+        {lang === "en" ? "AVAILABLE FOR HIRE" : "TERSEDIA UNTUK KERJA"}
+      </Badge>
+      <Badge variant="status" icon="rocket">
+        {lang === "en" ? "FULLSTACK DEVELOPER" : "PENGEMBANG FULLSTACK"}
+      </Badge>
+    </div>
+
+    <!-- Profile row -->
+    <div class="flex items-start gap-5 md:gap-6">
+      <!-- Avatar -->
+      <img
+        src="/avatar.jpg"
+        alt="Alex"
+        class="w-20 h-20 md:w-20 md:h-20 rounded-sm object-cover shrink-0"
+      />
+
+      <div class="flex-1 min-w-0">
+        <h1 class="text-2xl md:text-xl font-primary font-bold text-gray-900 dark:text-white uppercase tracking-wide">
+          {t(lang, "hero.name")}
+        </h1>
+        <p class="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 font-secondary mt-1">
+          <Icon name="map-pin" size={14} client:load />
+          Yogyakarta, Indonesia
+        </p>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mt-4">
+          <Badge># FRONTEND</Badge>
+          <Badge># BACKEND</Badge>
+          <Badge># WEB3 DEVELOPER</Badge>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share button -->
+  <div class="mt-4">
+    <button
+      id="share-btn"
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-gray-700 dark:text-gray-300 text-xs font-primary font-bold uppercase tracking-widest hover:bg-gray-50 dark:hover:bg-neutral-800 transition-colors"
+    >
+      {t(lang, "share.title")}
+      <Icon name="share2" size={14} client:load />
+    </button>
+  </div>
+</section>
+
+<style>
+  .hero-card::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(37, 208, 171, 0.12) 0%,
+      rgba(37, 208, 171, 0.05) 40%,
+      transparent 70%
+    );
+    animation: shine 10s ease-in-out infinite;
+    pointer-events: none;
+    filter: blur(20px);
+  }
+
+  @keyframes shine {
+    0% {
+      left: -80%;
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+    }
+    30% {
+      left: 100%;
+      opacity: 0;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById("share-btn")?.addEventListener("click", async () => {
+    const url = window.location.href;
+    if (navigator.share) {
+      await navigator.share({ title: document.title, url });
+    } else {
+      await navigator.clipboard.writeText(url);
+    }
+  });
+</script>

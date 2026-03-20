@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import FloatingNav from "../../components/FloatingNav.astro";
+import HeroSection from "../../components/HeroSection.astro";
+import SkillsSection from "../../components/SkillsSection.astro";
+import ExperienceSection from "../../components/ExperienceSection.astro";
+import EducationSection from "../../components/EducationSection.astro";
+import AchievementsSection from "../../components/AchievementsSection.astro";
+import ProjectsSection from "../../components/ProjectsSection.astro";
+
+const lang = "id" as const;
+---
+
+<Layout
+  title="Alex — Developer & Kreator"
+  description="Portfolio Alex — Developer yang bersemangat membangun aplikasi web modern dengan kode bersih dan desain yang matang."
+  lang={lang}
+>
+  <FloatingNav lang={lang} />
+
+  <main>
+    <div class="max-w-4xl mx-auto px-6 py-12 pb-24">
+      <HeroSection lang={lang} />
+      <SkillsSection lang={lang} />
+      <ExperienceSection lang={lang} />
+      <EducationSection lang={lang} />
+      <AchievementsSection lang={lang} />
+      <ProjectsSection lang={lang} />
+
+      <footer class="text-center text-xs text-gray-400 dark:text-gray-600 pt-8 border-t border-gray-200 dark:border-neutral-800">
+        <p>&copy; 2026 Alex. Dibuat dengan Astro & Tailwind CSS.</p>
+      </footer>
+    </div>
+  </main>
+</Layout>

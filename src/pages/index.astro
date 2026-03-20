@@ -1,16 +1,35 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import FloatingNav from "../components/FloatingNav.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SkillsSection from "../components/SkillsSection.astro";
+import ExperienceSection from "../components/ExperienceSection.astro";
+import EducationSection from "../components/EducationSection.astro";
+import AchievementsSection from "../components/AchievementsSection.astro";
+import ProjectsSection from "../components/ProjectsSection.astro";
+
+const lang = "en" as const;
 ---
 
-<Layout title="Alex — Developer & Creator">
-  <main class="flex items-center justify-center min-h-screen px-6">
-    <div class="text-center">
-      <h1 class="text-5xl md:text-7xl font-primary tracking-tight mb-4">
-        Hello, I'm Alex
-      </h1>
-      <p class="text-lg md:text-xl text-gray-600 font-secondary max-w-xl mx-auto">
-        Developer, creator, and problem solver. Welcome to my portfolio.
-      </p>
+<Layout
+  title="Alex — Developer & Creator"
+  description="Portfolio of Alex — A passionate developer crafting modern web applications with clean code and thoughtful design."
+  lang={lang}
+>
+  <FloatingNav lang={lang} />
+
+  <main>
+    <div class="max-w-4xl mx-auto px-6 py-12 pb-24">
+      <HeroSection lang={lang} />
+      <SkillsSection lang={lang} />
+      <ExperienceSection lang={lang} />
+      <EducationSection lang={lang} />
+      <AchievementsSection lang={lang} />
+      <!-- <ProjectsSection lang={lang} /> -->
+
+      <footer class="text-center text-xs text-gray-400 dark:text-gray-600 pt-8 border-t border-gray-200 dark:border-neutral-800">
+        <p>&copy; 2026 Alex. Built with Astro & Tailwind CSS.</p>
+      </footer>
     </div>
   </main>
 </Layout>

@@ -1,0 +1,44 @@
+---
+import type { Lang } from "../i18n/translations";
+import { t } from "../i18n/translations";
+import { achievements } from "../i18n/data";
+import SectionHeader from "./SectionHeader.astro";
+import Icon from "./Icon";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+function formatDate(dateStr: string, lang: Lang): string {
+  const [year, month] = dateStr.split("-");
+  const date = new Date(parseInt(year), parseInt(month) - 1);
+  return date.toLocaleDateString(lang === "id" ? "id-ID" : "en-US", {
+    year: "numeric",
+    month: "short",
+  });
+}
+---
+
+<section id="achievements" class="mb-20">
+  <SectionHeader title={t(lang, "section.achievements")} />
+
+  <div class="space-y-3">
+    {achievements.map((item) => (
+      <div class="flex items-start gap-4 rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5">
+        <div class="shrink-0 mt-0.5 text-yellow-500">
+          <Icon name="trophy" size={20} client:load />
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-sm font-primary font-bold text-gray-900 dark:text-white uppercase tracking-wide">
+            {item.title[lang]}
+          </h3>
+          <p class="text-xs text-gray-500 dark:text-gray-400 font-secondary mt-0.5">
+            {lang === "en" ? "Issued by" : "Diterbitkan oleh"} {item.issuer} &middot; {formatDate(item.date, lang)}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

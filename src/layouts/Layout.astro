@@ -1,11 +1,13 @@
 ---
 import "../styles/global.css";
+import type { Lang } from "../i18n/translations";
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
   canonicalUrl?: string;
+  lang?: Lang;
 }
 
 const {
@@ -13,20 +15,22 @@ const {
   description = "Portfolio website of Alex — Developer, creator, and problem solver.",
   ogImage = "/og-image.png",
   canonicalUrl,
+  lang = "en",
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const canonical = canonicalUrl ?? Astro.url.href;
 const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
+const altLang = lang === "en" ? "id" : "en";
+const altHref = lang === "en" ? `${siteUrl}/id/` : `${siteUrl}/`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang} class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
@@ -35,12 +39,18 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />
 
+    <!-- i18n alternate -->
+    <link rel="alternate" hreflang={altLang} href={altHref} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={lang === "id" ? "id_ID" : "en_US"} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -50,23 +60,9 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`
     <meta property="twitter:image" content={ogImageUrl} />
 
     <!-- Preload fonts -->
-    <link
-      rel="preload"
-      href="/fonts/Gruppe A.woff"
-      as="font"
-      type="font/woff"
-      crossorigin
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-      crossorigin
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
+    <link rel="preload" href="/fonts/Gruppe A.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -81,8 +77,18 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`
       "jobTitle": "Developer",
       "sameAs": [],
     })} />
+
+    <!-- Prevent FOUC for dark mode -->
+    <script is:inline>
+      (function() {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isDark = stored ? stored === "dark" : prefersDark;
+        document.documentElement.classList.toggle("dark", isDark);
+      })();
+    </script>
   </head>
-  <body class="min-h-screen bg-white text-gray-900 font-secondary antialiased">
+  <body class="min-h-screen bg-gray-50 dark:bg-neutral-950 text-gray-900 dark:text-gray-100 font-secondary antialiased transition-colors duration-200">
     <slot />
   </body>
 </html>

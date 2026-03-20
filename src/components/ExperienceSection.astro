@@ -1,0 +1,128 @@
+---
+import type { Lang } from "../i18n/translations";
+import { t } from "../i18n/translations";
+import { experiences } from "../i18n/data";
+import SectionHeader from "./SectionHeader.astro";
+import Icon from "./Icon";
+import Badge from "./Badge.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const INITIAL_COUNT = 3;
+const hasMore = experiences.length > INITIAL_COUNT;
+
+function formatDate(dateStr: string | null, lang: Lang): string {
+  if (!dateStr) return t(lang, "experience.present");
+  const [year, month] = dateStr.split("-");
+  const date = new Date(parseInt(year), parseInt(month) - 1);
+  return date.toLocaleDateString(lang === "id" ? "id-ID" : "en-US", {
+    year: "numeric",
+    month: "short",
+  });
+}
+---
+
+<section id="experience" class="mb-20">
+  <SectionHeader title={t(lang, "section.experience")} />
+
+  <div class="space-y-4" id="experience-list">
+    {experiences.map((exp, i) => (
+      <div
+        class:list={[
+          "exp-item rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6",
+          i >= INITIAL_COUNT && "hidden",
+        ]}
+      >
+        <div class="flex gap-4">
+          <!-- Logo -->
+          <div class="shrink-0">
+            <img
+              src={exp.logo ?? "/favicon.svg"}
+              alt={exp.company}
+              class="w-10 h-10 rounded-lg object-contain bg-gray-100 dark:bg-neutral-800 p-1"
+            />
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <!-- Header -->
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
+              <div>
+                <h3 class="text-base font-primary font-bold text-gray-900 dark:text-white uppercase tracking-wide">
+                  {exp.title[lang]}
+                </h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-secondary">
+                  {exp.company}
+                  {exp.type && <span> &middot; {exp.type[lang]}</span>}
+                </p>
+                <p class="text-xs text-gray-400 dark:text-gray-500 font-secondary">
+                  {formatDate(exp.startDate, lang)} — {formatDate(exp.endDate, lang)} &middot; {exp.location}
+                </p>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <ul class="space-y-1.5 mb-3 mt-3">
+              {exp.description[lang].map((item) => (
+                <li class="text-sm text-gray-600 dark:text-gray-400 font-secondary flex items-start gap-2">
+                  <span class="text-primary-500 mt-1 shrink-0">
+                    <Icon name="circle" size={6} fill="currentColor" client:load />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2">
+              {exp.tags.map((tag) => (
+                <Badge># {tag.toUpperCase()}</Badge>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {hasMore && (
+    <button
+      id="exp-toggle"
+      class="mt-4 w-full py-2.5 rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-sm font-primary font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:border-primary-500/30 transition-colors"
+    >
+      {lang === "en" ? `Show More (${experiences.length - INITIAL_COUNT})` : `Tampilkan Lagi (${experiences.length - INITIAL_COUNT})`}
+    </button>
+  )}
+</section>
+
+<script>
+  const btn = document.getElementById("exp-toggle");
+  let expanded = false;
+
+  btn?.addEventListener("click", () => {
+    expanded = !expanded;
+    const items = document.querySelectorAll(".exp-item.hidden, .exp-item[data-was-hidden]");
+
+    if (expanded) {
+      document.querySelectorAll(".exp-item.hidden").forEach((el) => {
+        el.classList.remove("hidden");
+        el.setAttribute("data-was-hidden", "");
+      });
+      btn.textContent = btn.dataset.lessText ?? "Show Less";
+    } else {
+      document.querySelectorAll(".exp-item[data-was-hidden]").forEach((el) => {
+        el.classList.add("hidden");
+        el.removeAttribute("data-was-hidden");
+      });
+      btn.textContent = btn.dataset.moreText ?? btn.textContent;
+    }
+  });
+
+  if (btn) {
+    btn.dataset.moreText = btn.textContent ?? "";
+    btn.dataset.lessText = document.documentElement.lang === "id" ? "Tampilkan Sedikit" : "Show Less";
+  }
+</script>

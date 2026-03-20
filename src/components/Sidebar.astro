@@ -1,0 +1,158 @@
+---
+import type { Lang } from "../i18n/translations";
+import { t } from "../i18n/translations";
+import ThemeToggle from "./ThemeToggle";
+import LanguageSwitcher from "./LanguageSwitcher";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const navItems = [
+  { key: "nav.about" as const, href: "#about", icon: "user" },
+  { key: "nav.skills" as const, href: "#skills", icon: "code" },
+  { key: "nav.experience" as const, href: "#experience", icon: "briefcase" },
+  { key: "nav.education" as const, href: "#education", icon: "graduation" },
+  { key: "nav.projects" as const, href: "#projects", icon: "rocket" },
+];
+---
+
+<!-- Mobile top bar -->
+<header
+  class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-gray-200 dark:border-neutral-800"
+>
+  <div class="flex items-center justify-between px-4 py-3">
+    <a href="#" class="text-lg font-primary font-bold text-gray-900 dark:text-white">A.</a>
+    <div class="flex items-center gap-2">
+      <LanguageSwitcher currentLang={lang} client:load />
+      <ThemeToggle client:load />
+      <button
+        id="mobile-menu-btn"
+        class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-800 transition-colors"
+        aria-label="Toggle menu"
+      >
+        <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav dropdown -->
+  <nav id="mobile-menu" class="hidden border-t border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-4 py-3">
+    <ul class="space-y-1">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
+          >
+            {t(lang, item.key)}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<!-- Desktop sidebar -->
+<aside
+  class="hidden lg:flex fixed top-0 left-0 h-screen w-64 flex-col bg-white dark:bg-neutral-900 border-r border-gray-200 dark:border-neutral-800 z-40"
+>
+  <div class="px-6 py-8">
+    <a href="#" class="text-2xl font-primary font-bold text-gray-900 dark:text-white">Alex.</a>
+    <p class="text-xs text-gray-500 dark:text-gray-500 mt-1 font-secondary">Developer & Creator</p>
+  </div>
+
+  <nav class="flex-1 px-4">
+    <ul class="space-y-1">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-neutral-800/60 transition-colors"
+          >
+            {item.icon === "user" && (
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            )}
+            {item.icon === "code" && (
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            )}
+            {item.icon === "briefcase" && (
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            )}
+            {item.icon === "graduation" && (
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+              </svg>
+            )}
+            {item.icon === "rocket" && (
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+              </svg>
+            )}
+            {t(lang, item.key)}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="px-4 pb-6 space-y-3">
+    <div class="flex items-center justify-between px-3">
+      <LanguageSwitcher currentLang={lang} client:load />
+      <ThemeToggle client:load />
+    </div>
+    <div class="px-3 pt-3 border-t border-gray-200 dark:border-neutral-800">
+      <p class="text-xs text-gray-400 dark:text-gray-600">&copy; 2026 Alex</p>
+    </div>
+  </div>
+</aside>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  btn?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+  });
+
+  // Close mobile menu on nav link click
+  document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu?.classList.add("hidden");
+    });
+  });
+
+  // Active nav link highlight on scroll
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
+
+  function updateActiveNav() {
+    let current = "";
+    sections.forEach((section) => {
+      const el = section as HTMLElement;
+      const top = el.offsetTop - 100;
+      if (window.scrollY >= top) {
+        current = el.getAttribute("id") ?? "";
+      }
+    });
+    navLinks.forEach((link) => {
+      link.classList.remove("text-primary-500", "dark:text-primary-400", "bg-gray-50", "dark:bg-neutral-800/60");
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("text-primary-500", "dark:text-primary-400", "bg-gray-50", "dark:bg-neutral-800/60");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", updateActiveNav);
+  updateActiveNav();
+</script>
