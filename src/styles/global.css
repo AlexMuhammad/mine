@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Gruppe A";
+  src: url("/fonts/Gruppe A.woff") format("woff"),
+    url("/fonts/Gruppe A.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-primary: "Gruppe A", sans-serif;
+  --font-secondary: "Inter", sans-serif;
+}
