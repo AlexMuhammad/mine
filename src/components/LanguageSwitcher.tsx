@@ -14,11 +14,11 @@ export default function LanguageSwitcher({ currentLang }: Props) {
     <button
       onClick={toggle}
       aria-label={currentLang === "en" ? "Switch to Bahasa Indonesia" : "Switch to English"}
-      className="relative w-[4.25rem] h-8 rounded-full bg-gray-200 dark:bg-neutral-800 transition-colors cursor-pointer flex items-center px-1"
+      className="relative w-[4.25rem] h-8 rounded-sm bg-gray-200 dark:bg-neutral-800 transition-colors cursor-pointer flex items-center px-1"
     >
       {/* Sliding pill */}
       <span
-        className={`absolute top-1 w-6 h-6 rounded-full bg-white dark:bg-neutral-600 shadow-sm transition-transform duration-200 ${
+        className={`absolute top-1 w-6 h-6 rounded-sm bg-white dark:bg-neutral-600 shadow-sm transition-transform duration-200 ${
           currentLang === "en" ? "left-1" : "left-[calc(100%-1.75rem)]"
         }`}
       />

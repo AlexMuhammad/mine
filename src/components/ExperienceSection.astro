@@ -27,13 +27,13 @@ function formatDate(dateStr: string | null, lang: Lang): string {
 ---
 
 <section id="experience" class="mb-20">
-  <SectionHeader title={t(lang, "section.experience")} />
+  <SectionHeader title={t(lang, "section.experience")} icon="briefcase" />
 
   <div class="space-y-4" id="experience-list">
     {experiences.map((exp, i) => (
       <div
         class:list={[
-          "exp-item rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6",
+          "exp-item rounded-sm border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6",
           i >= INITIAL_COUNT && "hidden",
         ]}
       >
@@ -43,7 +43,7 @@ function formatDate(dateStr: string | null, lang: Lang): string {
             <img
               src={exp.logo ?? "/favicon.svg"}
               alt={exp.company}
-              class="w-10 h-10 rounded-lg object-contain bg-gray-100 dark:bg-neutral-800 p-1"
+              class="w-10 h-10 rounded-sm object-contain bg-gray-100 dark:bg-neutral-800 p-1"
             />
           </div>
 
@@ -91,7 +91,7 @@ function formatDate(dateStr: string | null, lang: Lang): string {
   {hasMore && (
     <button
       id="exp-toggle"
-      class="mt-4 w-full py-2.5 rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-sm font-primary font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:border-primary-500/30 transition-colors"
+      class="mt-4 w-full py-2.5 rounded-sm border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-sm font-primary font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:border-primary-500/30 transition-colors"
     >
       {lang === "en" ? `Show More (${experiences.length - INITIAL_COUNT})` : `Tampilkan Lagi (${experiences.length - INITIAL_COUNT})`}
     </button>

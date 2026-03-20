@@ -22,11 +22,11 @@ function formatDate(dateStr: string, lang: Lang): string {
 ---
 
 <section id="achievements" class="mb-20">
-  <SectionHeader title={t(lang, "section.achievements")} />
+  <SectionHeader title={t(lang, "section.achievements")} icon="trophy" />
 
   <div class="space-y-3">
     {achievements.map((item) => (
-      <div class="flex items-start gap-4 rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5">
+      <div class="flex items-start gap-4 rounded-sm border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5">
         <div class="shrink-0 mt-0.5 text-yellow-500">
           <Icon name="trophy" size={20} client:load />
         </div>

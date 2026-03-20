@@ -23,7 +23,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      className="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
+      className="p-2.5 rounded-sm hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
     >
       {dark ? (
         <Sun size={20} className="text-yellow-400" />

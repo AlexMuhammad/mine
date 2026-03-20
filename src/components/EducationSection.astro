@@ -12,11 +12,11 @@ const { lang } = Astro.props;
 ---
 
 <section id="education" class="mb-20">
-  <SectionHeader title={t(lang, "section.education")} />
+  <SectionHeader title={t(lang, "section.education")} icon="graduation-cap" />
 
   <div class="space-y-4">
     {educations.map((edu) => (
-      <div class="rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6">
+      <div class="rounded-sm border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6">
         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
           <div>
             <h3 class="text-base font-primary font-bold text-gray-900 dark:text-white uppercase tracking-wide">
@@ -31,7 +31,7 @@ const { lang } = Astro.props;
               </p>
             )}
           </div>
-          <span class="text-xs font-medium text-primary-500 bg-primary-500/10 px-3 py-1 rounded-full whitespace-nowrap self-start">
+          <span class="text-xs font-medium text-primary-500 bg-primary-500/10 px-3 py-1 rounded-sm whitespace-nowrap self-start">
             {edu.startDate} — {edu.endDate}
           </span>
         </div>

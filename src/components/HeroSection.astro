@@ -56,7 +56,7 @@ const { lang } = Astro.props;
   <div class="mt-4">
     <button
       id="share-btn"
-      class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-gray-700 dark:text-gray-300 text-xs font-primary font-bold uppercase tracking-widest hover:bg-gray-50 dark:hover:bg-neutral-800 transition-colors"
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-gray-700 dark:text-gray-300 text-xs font-primary font-bold uppercase tracking-widest hover:bg-gray-50 dark:hover:bg-neutral-800 transition-colors"
     >
       {t(lang, "share.title")}
       <Icon name="share2" size={14} client:load />

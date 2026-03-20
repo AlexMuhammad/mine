@@ -1,16 +1,23 @@
 ---
+import Icon from "./Icon";
+import type { IconName } from "./Icon";
+
 interface Props {
   title: string;
+  icon?: IconName;
   id?: string;
 }
 
-const { title, id } = Astro.props;
+const { title, icon = "code", id } = Astro.props;
 ---
 
 <div class="flex items-center gap-4 mb-8" id={id}>
-  <h2 class="text-sm font-primary font-bold uppercase tracking-[0.2em] text-gray-900 dark:text-white whitespace-nowrap">
-    <slot name="icon" />
+  <h2 class="text-sm font-primary font-bold uppercase tracking-[0.2em] text-gray-900 dark:text-white whitespace-nowrap flex items-center gap-2">
+    <Icon name={icon} size={16} client:load />
     {title}
   </h2>
-  <div class="flex-1 border-t border-dashed border-gray-300 dark:border-neutral-700"></div>
+  <div class="flex w-full items-center gap-1">
+    <div class="flex-1 border-t-[0.5px] border-gray-300 dark:border-neutral-700"></div>
+    <div class="bg-neutral-700 h-1.5 w-1.5"></div>
+  </div>
 </div>

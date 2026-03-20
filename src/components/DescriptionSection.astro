@@ -1,0 +1,18 @@
+---
+import type { Lang } from "../i18n/translations";
+import { t } from "../i18n/translations";
+import SectionHeader from "./SectionHeader.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="description" class="mb-12">
+  <SectionHeader title={t(lang, "section.description")} icon="user" />
+    <p class="text-sm text-gray-600 dark:text-gray-400 font-secondary leading-relaxed">
+      {t(lang, "description.text")}
+    </p>
+</section>

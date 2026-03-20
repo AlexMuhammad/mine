@@ -78,12 +78,10 @@ const altHref = lang === "en" ? `${siteUrl}/id/` : `${siteUrl}/`;
       "sameAs": [],
     })} />
 
-    <!-- Prevent FOUC for dark mode -->
+    <!-- Force dark mode -->
     <script is:inline>
       (function() {
-        const stored = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const isDark = stored ? stored === "dark" : prefersDark;
+        const isDark = true;
         document.documentElement.classList.toggle("dark", isDark);
       })();
     </script>

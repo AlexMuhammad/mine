@@ -11,9 +11,9 @@ const { lang = "en" } = Astro.props;
 ---
 
 <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-  <div class="flex items-center gap-1 px-3 py-2.5 rounded-full bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-gray-200 dark:border-neutral-700 shadow-lg shadow-black/5 dark:shadow-black/30">
+  <div class="flex items-center gap-1 px-3 py-2.5 rounded-sm bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-gray-200 dark:border-neutral-700 shadow-lg shadow-black/5 dark:shadow-black/30">
     <!-- Home -->
-    <a href="#about" class="nav-icon-link p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="Home">
+    <a href="#about" class="nav-icon-link p-2.5 rounded-sm hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="Home">
       <Icon name="home" size={20} className="text-gray-800 dark:text-gray-200" client:load />
     </a>
 
@@ -21,30 +21,24 @@ const { lang = "en" } = Astro.props;
     <div class="w-px h-5 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
 
     <!-- GitHub -->
-    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="GitHub">
+    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-sm hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="GitHub">
       <Icon name="github" size={20} className="text-gray-800 dark:text-gray-200" client:load />
     </a>
 
     <!-- LinkedIn -->
-    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="LinkedIn">
+    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-sm hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="LinkedIn">
       <Icon name="linkedin" size={20} className="text-gray-800 dark:text-gray-200" client:load />
     </a>
 
     <!-- YouTube -->
-    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="YouTube">
+    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-sm hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="YouTube">
       <Icon name="youtube" size={20} className="text-gray-800 dark:text-gray-200" client:load />
     </a>
 
     <!-- Instagram -->
-    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="Instagram">
+    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-sm hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors" aria-label="Instagram">
       <Icon name="instagram" size={20} className="text-gray-800 dark:text-gray-200" client:load />
     </a>
-
-    <!-- Divider -->
-    <div class="w-px h-5 bg-gray-200 dark:bg-neutral-700 mx-1"></div>
-
-    <!-- Theme Toggle -->
-    <ThemeToggle client:load />
 
     <!-- Divider -->
     <div class="w-px h-5 bg-gray-200 dark:bg-neutral-700 mx-1"></div>

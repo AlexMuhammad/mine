@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import FloatingNav from "../components/FloatingNav.astro";
 import HeroSection from "../components/HeroSection.astro";
+import DescriptionSection from "../components/DescriptionSection.astro";
 import SkillsSection from "../components/SkillsSection.astro";
 import ExperienceSection from "../components/ExperienceSection.astro";
 import EducationSection from "../components/EducationSection.astro";
@@ -21,6 +22,7 @@ const lang = "en" as const;
   <main>
     <div class="max-w-4xl mx-auto px-6 py-12 pb-24">
       <HeroSection lang={lang} />
+      <DescriptionSection lang={lang} />
       <SkillsSection lang={lang} />
       <ExperienceSection lang={lang} />
       <EducationSection lang={lang} />

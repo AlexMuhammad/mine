@@ -31,6 +31,11 @@ export const translations = {
     "section.education": "Education",
     "section.projects": "Projects",
     "section.achievements": "Achievements",
+    "section.description": "Description",
+
+    // Description
+    "description.text":
+      "A passionate fullstack developer with 4+ years of experience building modern web applications. Specialized in React, TypeScript, and Web3 development. Active in the blockchain ecosystem, winning multiple international hackathons. Currently working as a Fullstack Engineer and Co-Founder, always exploring new technologies and contributing to the developer community.",
 
     // Skills
     "skills.frontend": "Frontend",
@@ -78,6 +83,11 @@ export const translations = {
     "section.education": "Pendidikan",
     "section.projects": "Proyek",
     "section.achievements": "Pencapaian",
+    "section.description": "Deskripsi",
+
+    // Description
+    "description.text":
+      "Seorang fullstack developer yang bersemangat dengan pengalaman 4+ tahun membangun aplikasi web modern. Spesialisasi di React, TypeScript, dan pengembangan Web3. Aktif di ekosistem blockchain, memenangkan berbagai hackathon internasional. Saat ini bekerja sebagai Fullstack Engineer dan Co-Founder, selalu mengeksplorasi teknologi baru dan berkontribusi pada komunitas developer.",
 
     // Skills
     "skills.frontend": "Frontend",

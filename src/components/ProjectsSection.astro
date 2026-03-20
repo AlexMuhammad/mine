@@ -14,11 +14,11 @@ const { lang } = Astro.props;
 ---
 
 <section id="projects" class="mb-20">
-  <SectionHeader title={t(lang, "section.projects")} />
+  <SectionHeader title={t(lang, "section.projects")} icon="rocket" />
 
   <div class="grid md:grid-cols-2 gap-4">
     {projects.map((project) => (
-      <div class="rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 flex flex-col">
+      <div class="rounded-sm border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 flex flex-col">
         {project.highlight && (
           <div class="flex flex-wrap gap-2 mb-4">
             <Badge variant="highlight">{project.highlight}</Badge>
