@@ -13,6 +13,7 @@ export interface SkillCategory {
 export interface Experience {
   title: Record<Lang, string>;
   company: string;
+  url?: string;
   type?: Record<Lang, string>;
   logo?: string;
   location: string;
@@ -35,6 +36,7 @@ export interface Education {
 export interface Achievement {
   title: Record<Lang, string>;
   issuer: string;
+  url?: string;
   date: string;
 }
 
@@ -92,6 +94,7 @@ export const experiences: Experience[] = [
   {
     title: { en: "Fullstack Engineer", id: "Fullstack Engineer" },
     company: "IDRX",
+    url: "https://idrx.co",
     type: { en: "Contract", id: "Kontrak" },
     logo: "/logos/idrx.png",
     location: "Remote",
@@ -117,7 +120,7 @@ export const experiences: Experience[] = [
     logo: "/logos/centuari.png",
     location: "Remote",
     startDate: "2025-06",
-    endDate: null,
+    endDate: "2026-06",
     description: {
       en: [
         "Co-founded the company and leading frontend engineering efforts",
@@ -173,27 +176,27 @@ export const experiences: Experience[] = [
     },
     tags: ["React", "Node.js", "Mentoring"],
   },
-  {
-    title: {
-      en: "Chief Suffering Officer (CSO)",
-      id: "Chief Suffering Officer (CSO)",
-    },
-    company: "daily.dev",
-    type: { en: "Seasonal", id: "Musiman" },
-    logo: "/logos/dailydev.png",
-    location: "London, UK",
-    startDate: "2024-04",
-    endDate: "2024-05",
-    description: {
-      en: [
-        "Community engagement role at daily.dev developer platform",
-      ],
-      id: [
-        "Peran keterlibatan komunitas di platform developer daily.dev",
-      ],
-    },
-    tags: ["Community", "Developer Relations"],
-  },
+  // {
+  //   title: {
+  //     en: "Chief Suffering Officer (CSO)",
+  //     id: "Chief Suffering Officer (CSO)",
+  //   },
+  //   company: "daily.dev",
+  //   type: { en: "Seasonal", id: "Musiman" },
+  //   logo: "/logos/dailydev.png",
+  //   location: "London, UK",
+  //   startDate: "2024-04",
+  //   endDate: "2024-05",
+  //   description: {
+  //     en: [
+  //       "Community engagement role at daily.dev developer platform",
+  //     ],
+  //     id: [
+  //       "Peran keterlibatan komunitas di platform developer daily.dev",
+  //     ],
+  //   },
+  //   tags: ["Community", "Developer Relations"],
+  // },
   {
     title: { en: "Frontend Engineer", id: "Frontend Engineer" },
     company: "PT Menara Astra",
@@ -362,33 +365,21 @@ export const achievements: Achievement[] = [
 
 export const projects: Project[] = [
   {
-    title: "Crypto Fantasy League",
+    title: "Centuari Finance",
     description: {
-      en: "Fantasy Sports for Crypto Tokens where you draft token squad, compete in PvP based on real market movements.",
-      id: "Fantasy Sports untuk Token Crypto di mana kamu membuat squad token, berkompetisi dalam PvP berdasarkan pergerakan pasar nyata.",
+      en: "DeFi platform offering on-chain fixed-rate lending and borrowing. Co-founded the company and led the frontend architecture and design system.",
+      id: "Platform DeFi dengan layanan lending dan borrowing fixed-rate on-chain. Co-founder sekaligus memimpin arsitektur frontend dan design system.",
     },
-    tags: ["React", "Solana", "TypeScript"],
-    highlight: "1ST PLACE - GAMING",
-    liveUrl: "#",
-    repoUrl: "#",
+    tags: ["React", "TypeScript", "Web3", "DeFi"],
+    liveUrl: "https://centuari.finance/",
   },
   {
-    title: "Portfolio Website",
+    title: "IDRX",
     description: {
-      en: "Personal portfolio website built with Astro, React, and Tailwind CSS. Features dark mode and i18n support.",
-      id: "Website portfolio pribadi dibangun dengan Astro, React, dan Tailwind CSS. Dilengkapi dark mode dan dukungan i18n.",
+      en: "Indonesian Rupiah-backed stablecoin platform powering on-chain payments, swaps, and remittances. Built and maintained core fullstack features across the product.",
+      id: "Platform stablecoin IDR untuk pembayaran, swap, dan remitansi on-chain. Membangun dan memelihara fitur fullstack inti di produk.",
     },
-    tags: ["Astro", "React", "Tailwind CSS"],
-    liveUrl: "#",
-    repoUrl: "#",
-  },
-  {
-    title: "Task Management App",
-    description: {
-      en: "A full-stack task management application with real-time collaboration features and team workspaces.",
-      id: "Aplikasi manajemen tugas full-stack dengan fitur kolaborasi real-time dan workspace tim.",
-    },
-    tags: ["Next.js", "PostgreSQL", "WebSocket"],
-    repoUrl: "#",
+    tags: ["TypeScript", "React", "Node.js", "Web3"],
+    liveUrl: "https://home.idrx.co/en/",
   },
 ];

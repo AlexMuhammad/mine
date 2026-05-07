@@ -29,7 +29,7 @@ export const translations = {
     "section.skills": "Skills",
     "section.experience": "Experience",
     "section.education": "Education",
-    "section.projects": "Projects",
+    "section.projects": "Selected Projects",
     "section.achievements": "Achievements",
     "section.description": "Description",
 
@@ -52,10 +52,6 @@ export const translations = {
     // Footer
     "footer.rights": "All rights reserved.",
     "footer.builtWith": "Built with",
-
-    // Theme
-    "theme.light": "Light",
-    "theme.dark": "Dark",
 
     // Share
     "share.title": "Share",
@@ -81,7 +77,7 @@ export const translations = {
     "section.skills": "Keahlian",
     "section.experience": "Pengalaman",
     "section.education": "Pendidikan",
-    "section.projects": "Proyek",
+    "section.projects": "Proyek Pilihan",
     "section.achievements": "Pencapaian",
     "section.description": "Deskripsi",
 
@@ -104,10 +100,6 @@ export const translations = {
     // Footer
     "footer.rights": "Hak cipta dilindungi.",
     "footer.builtWith": "Dibuat dengan",
-
-    // Theme
-    "theme.light": "Terang",
-    "theme.dark": "Gelap",
 
     // Share
     "share.title": "Bagikan",

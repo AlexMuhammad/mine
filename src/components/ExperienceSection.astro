@@ -3,8 +3,6 @@ import type { Lang } from "../i18n/translations";
 import { t } from "../i18n/translations";
 import { experiences } from "../i18n/data";
 import SectionHeader from "./SectionHeader.astro";
-import Icon from "./Icon";
-import Badge from "./Badge.astro";
 
 interface Props {
   lang: Lang;
@@ -12,86 +10,58 @@ interface Props {
 
 const { lang } = Astro.props;
 
-const INITIAL_COUNT = 3;
+const INITIAL_COUNT = 10;
 const hasMore = experiences.length > INITIAL_COUNT;
-
-function formatDate(dateStr: string | null, lang: Lang): string {
-  if (!dateStr) return t(lang, "experience.present");
-  const [year, month] = dateStr.split("-");
-  const date = new Date(parseInt(year), parseInt(month) - 1);
-  return date.toLocaleDateString(lang === "id" ? "id-ID" : "en-US", {
-    year: "numeric",
-    month: "short",
-  });
-}
 ---
 
 <section id="experience" class="mb-20">
   <SectionHeader title={t(lang, "section.experience")} icon="briefcase" />
 
-  <div class="space-y-4" id="experience-list">
+  <ul class="divide-y divide-gray-100" id="experience-list">
     {experiences.map((exp, i) => (
-      <div
+      <li
         class:list={[
-          "exp-item rounded-sm border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6",
+          "exp-item grid grid-cols-[60px_1fr] sm:grid-cols-[80px_1fr_1fr] items-center gap-x-4 py-3",
           i >= INITIAL_COUNT && "hidden",
         ]}
       >
-        <div class="flex gap-4">
-          <!-- Logo -->
-          <div class="shrink-0">
-            <img
-              src={exp.logo ?? "/favicon.svg"}
-              alt={exp.company}
-              class="w-10 h-10 rounded-sm object-contain bg-gray-100 dark:bg-neutral-800 p-1"
-            />
-          </div>
+        <span class="text-sm font-secondary text-gray-400 tabular-nums">
+          {exp.startDate.split("-")[0]}
+        </span>
 
-          <div class="flex-1 min-w-0">
-            <!-- Header -->
-            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
-              <div>
-                <h3 class="text-base font-primary font-bold text-gray-900 dark:text-white uppercase tracking-wide">
-                  {exp.title[lang]}
-                </h3>
-                <p class="text-sm text-gray-500 dark:text-gray-400 font-secondary">
-                  {exp.company}
-                  {exp.type && <span> &middot; {exp.type[lang]}</span>}
-                </p>
-                <p class="text-xs text-gray-400 dark:text-gray-500 font-secondary">
-                  {formatDate(exp.startDate, lang)} — {formatDate(exp.endDate, lang)} &middot; {exp.location}
-                </p>
-              </div>
-            </div>
-
-            <!-- Description -->
-            <ul class="space-y-1.5 mb-3 mt-3">
-              {exp.description[lang].map((item) => (
-                <li class="text-sm text-gray-600 dark:text-gray-400 font-secondary flex items-start gap-2">
-                  <span class="text-primary-500 mt-1 shrink-0">
-                    <Icon name="circle" size={6} fill="currentColor" client:load />
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2">
-              {exp.tags.map((tag) => (
-                <Badge># {tag.toUpperCase()}</Badge>
-              ))}
-            </div>
-          </div>
+        <div class="flex items-center gap-2 min-w-0">
+          {exp.url ? (
+            <a
+              href={exp.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-primary font-medium text-gray-900 truncate hover:text-primary-500 hover:underline underline-offset-4 decoration-1 transition-colors"
+            >
+              {exp.company}
+            </a>
+          ) : (
+            <span class="text-sm font-primary font-medium text-gray-900 truncate">
+              {exp.company}
+            </span>
+          )}
+          {exp.endDate === null && (
+            <span class="shrink-0 px-1.5 py-0.5 rounded-sm border border-gray-200 text-[10px] font-secondary text-gray-500 uppercase tracking-wide">
+              Now
+            </span>
+          )}
         </div>
-      </div>
+
+        <span class="col-span-2 sm:col-span-1 text-sm font-secondary text-gray-400 truncate sm:pl-0 pl-16">
+          {exp.title[lang]}
+        </span>
+      </li>
     ))}
-  </div>
+  </ul>
 
   {hasMore && (
     <button
       id="exp-toggle"
-      class="mt-4 w-full py-2.5 rounded-sm border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-sm font-primary font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 hover:border-primary-500/30 transition-colors"
+      class="mt-4 text-xs font-primary font-bold uppercase tracking-widest text-gray-500 hover:text-primary-500 transition-colors"
     >
       {lang === "en" ? `Show More (${experiences.length - INITIAL_COUNT})` : `Tampilkan Lagi (${experiences.length - INITIAL_COUNT})`}
     </button>
@@ -102,9 +72,13 @@ function formatDate(dateStr: string | null, lang: Lang): string {
   const btn = document.getElementById("exp-toggle");
   let expanded = false;
 
+  if (btn) {
+    btn.dataset.moreText = btn.textContent ?? "";
+    btn.dataset.lessText = document.documentElement.lang === "id" ? "Tampilkan Sedikit" : "Show Less";
+  }
+
   btn?.addEventListener("click", () => {
     expanded = !expanded;
-    const items = document.querySelectorAll(".exp-item.hidden, .exp-item[data-was-hidden]");
 
     if (expanded) {
       document.querySelectorAll(".exp-item.hidden").forEach((el) => {
@@ -120,9 +94,4 @@ function formatDate(dateStr: string | null, lang: Lang): string {
       btn.textContent = btn.dataset.moreText ?? btn.textContent;
     }
   });
-
-  if (btn) {
-    btn.dataset.moreText = btn.textContent ?? "";
-    btn.dataset.lessText = document.documentElement.lang === "id" ? "Tampilkan Sedikit" : "Show Less";
-  }
 </script>
